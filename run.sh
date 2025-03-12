@@ -47,8 +47,8 @@ find $DESTINATION -type d -exec chmod 755 {} \;
 docker-compose -f $DESTINATION/docker-compose.yml pull
 docker-compose -f $DESTINATION/docker-compose.yml up -d
 
-sudo chmod -R 777 $DESTINATION/addons
-sudo chmod -R 777 $DESTINATION/etc
-sudo chmod -R 777 $DESTINATION/postgresql
+#sudo chmod -R 777 $DESTINATION/addons
+#sudo chmod -R 777 $DESTINATION/etc
+#sudo chmod -R 777 $DESTINATION/postgresql
 
 echo "Odoo started at http://localhost:$PORT | Master Password: P@ss@123 | Live chat port: $CHAT"
