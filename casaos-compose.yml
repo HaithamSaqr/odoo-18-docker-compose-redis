@@ -114,7 +114,7 @@ services:
       icon: https://cdn.jsdelivr.net/gh/bigbeartechworld/big-bear-casaos/Apps/odoo/logo.jpg
     ports:
       - target: 6379
-        published: "127.0.0.1:6379"
+        published: "6379"
         protocol: tcp
     restart: always
     volumes:
