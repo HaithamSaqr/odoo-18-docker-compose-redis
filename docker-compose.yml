@@ -13,6 +13,7 @@ services:
       POSTGRES_DB: postgres
     restart: always
     labels:
+      icon: https://cdn.jsdelivr.net/gh/bigbeartechworld/big-bear-casaos/Apps/odoo/logo.jpg
       casaos.category: "Database"
       casaos.description: "PostgreSQL database for Odoo"
       casaos.port: "5432"
