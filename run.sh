@@ -4,7 +4,7 @@ PORT=$2
 CHAT=$3
 
 # Clone Odoo directory
-git clone --depth=1 https://github.com/HaithamSaqr/odoo-18-docker-compose $DESTINATION
+git clone --depth=1 https://github.com/HaithamSaqr/odoo-18-docker-compose-redis $DESTINATION
 rm -rf $DESTINATION/.git
 
 # Create PostgreSQL directory
@@ -42,6 +42,10 @@ fi
 # Set file and directory permissions after installation
 find $DESTINATION -type f -exec chmod 644 {} \;
 find $DESTINATION -type d -exec chmod 755 {} \;
+
+echo "Pulling Docker images..."
+docker-compose -f $DESTINATION/docker-compose.yml pull redis
+docker-compose -f $DESTINATION/docker-compose.yml pull
 
 echo "Checking if Redis is running..."
 until docker ps | grep -q redis; do
