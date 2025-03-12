@@ -12,7 +12,7 @@ mkdir -p $DESTINATION/postgresql
 
 # Change ownership to current user and set restrictive permissions for security
 sudo chown -R $USER:$USER $DESTINATION
-sudo chmod -R 755 $DESTINATION
+sudo chmod -R 700 $DESTINATION  # Only the user has access
 
 # Check if running on macOS
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -43,9 +43,12 @@ fi
 find $DESTINATION -type f -exec chmod 644 {} \;
 find $DESTINATION -type d -exec chmod 755 {} \;
 
-# Run
+# Run Odoo
 docker-compose -f $DESTINATION/docker-compose.yml pull
-docker-compose -p $DESTINATION -f $DESTINATION/docker-compose.yml up -d
+docker-compose -f $DESTINATION/docker-compose.yml up -d
 
-echo "Odoo started at http://localhost:$PORT | Master Password: falconvalley | Live chat port: $CHAT"
-echo "Project name: $DESTINATION"
+sudo chmod -R 777 $DESTINATION/addons
+sudo chmod -R 777 $DESTINATION/etc
+sudo chmod -R 777 $DESTINATION/postgresql
+
+echo "Odoo started at http://localhost:$PORT | Master Password: P@ss@123 | Live chat port: $CHAT"
