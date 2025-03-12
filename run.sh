@@ -12,7 +12,7 @@ mkdir -p $DESTINATION/postgresql
 
 # Change ownership to current user and set restrictive permissions for security
 sudo chown -R $USER:$USER $DESTINATION
-sudo chmod -R 777 $DESTINATION  # Only the user has access
+sudo chmod -R 755 $DESTINATION
 
 # Check if running on macOS
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -43,7 +43,15 @@ fi
 find $DESTINATION -type f -exec chmod 644 {} \;
 find $DESTINATION -type d -exec chmod 755 {} \;
 
+echo "Checking if Redis is running..."
+until docker ps | grep -q redis; do
+  echo "Waiting for Redis to start..."
+  sleep 3
+done
+echo "Redis is running!"
+
 # Run Odoo
+docker-compose -f $DESTINATION/docker-compose.yml pull
 docker-compose -f $DESTINATION/docker-compose.yml up -d
 
 echo "Odoo started at http://localhost:$PORT | Master Password: falconvalley | Live chat port: $CHAT"
