@@ -1,4 +1,3 @@
-name: odoo18
 version: '3.7'
 services:
   db:
