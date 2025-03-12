@@ -12,11 +12,6 @@ services:
       POSTGRES_PASSWORD: P@ss@123@123
       POSTGRES_DB: postgres
     restart: always
-    labels:
-      icon: https://cdn.jsdelivr.net/gh/bigbeartechworld/big-bear-casaos/Apps/odoo/logo.jpg
-      casaos.category: "Database"
-      casaos.description: "PostgreSQL database for Odoo"
-      casaos.port: "5432"
     volumes:
       - ./postgresql:/var/lib/postgresql/data
   odoo18:
@@ -40,12 +35,6 @@ services:
       - ./addons:/mnt/extra-addons
       - ./etc:/etc/odoo
     restart: always
-    labels:
-      casaos.category: "Productivity"
-      casaos.description: "Odoo 18 with PostgreSQL and Redis"
-      casaos.port: "10018"
-      casaos.web_ui: "http://localhost:10018"
-
   redis:
       image: redis:latest
       deploy:
@@ -56,7 +45,3 @@ services:
         - "6379:6379"
       command: redis-server --save 60 1 --loglevel warning
       restart: always
-      labels:
-        casaos.category: "Cache"
-        casaos.description: "Redis caching server for Odoo"
-        casaos.port: "6379"
