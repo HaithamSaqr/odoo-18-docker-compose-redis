@@ -36,7 +36,6 @@ services:
 
   odoo18:
     cpu_shares: 50
-    command: []
     container_name: odoo18
     depends_on:
       db:
@@ -49,6 +48,8 @@ services:
       resources:
         limits:
           memory: 4000M
+    tty: true
+    command: --
     environment:
       - HOST=db
       - PASSWORD=P@ss@123@123
