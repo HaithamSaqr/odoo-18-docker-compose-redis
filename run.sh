@@ -43,14 +43,7 @@ fi
 find $DESTINATION -type f -exec chmod 644 {} \;
 find $DESTINATION -type d -exec chmod 755 {} \;
 
-echo "Checking if Redis is running..."
-until docker ps | grep -q redis; do
-  echo "Waiting for Redis to start..."
-  sleep 3
-done
-echo "Redis is running!"
-
-# Run Odoo
+# Run
 docker-compose -f $DESTINATION/docker-compose.yml pull
 docker-compose -f $DESTINATION/docker-compose.yml up -d
 
