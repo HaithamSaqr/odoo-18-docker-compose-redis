@@ -48,3 +48,4 @@ docker-compose -f $DESTINATION/docker-compose.yml pull
 docker-compose -p $DESTINATION -f $DESTINATION/docker-compose.yml up -d
 
 echo "Odoo started at http://localhost:$PORT | Master Password: falconvalley | Live chat port: $CHAT"
+echo "Project name: $DESTINATION"
