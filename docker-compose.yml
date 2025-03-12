@@ -12,6 +12,10 @@ services:
       POSTGRES_PASSWORD: P@ss@123@123
       POSTGRES_DB: postgres
     restart: always
+    labels:
+      casaos.category: "Database"
+      casaos.description: "PostgreSQL database for Odoo"
+      casaos.port: "5432"
     volumes:
       - ./postgresql:/var/lib/postgresql/data
   odoo18:
@@ -22,7 +26,7 @@ services:
           memory: 4g
     shm_size: '2gb'
     depends_on:
-      - db
+      - redis
     ports:
       - "10018:8069"
       - "20018:8072"
@@ -30,7 +34,28 @@ services:
       HOST: db
       USER: odoo
       PASSWORD: P@ss@123@123
+      REDIS_URL: redis://redis:6379/0
     volumes:
       - ./addons:/mnt/extra-addons
       - ./etc:/etc/odoo
     restart: always
+    labels:
+      casaos.category: "Productivity"
+      casaos.description: "Odoo 18 with PostgreSQL and Redis"
+      casaos.port: "10018"
+      casaos.web_ui: "http://localhost:10018"
+
+  redis:
+      image: redis:latest
+      deploy:
+        resources:
+          limits:
+            memory: 512m
+      ports:
+        - "6379:6379"
+      command: redis-server --save 60 1 --loglevel warning
+      restart: always
+      labels:
+        casaos.category: "Cache"
+        casaos.description: "Redis caching server for Odoo"
+        casaos.port: "6379"
