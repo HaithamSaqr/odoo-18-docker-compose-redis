@@ -4,8 +4,10 @@ services:
     image: postgres:17
     deploy:
       resources:
+        reservations:
+          memory: 2G
         limits:
-          memory: 4g
+          memory: 4G
     shm_size: '2gb'
     environment:
       POSTGRES_USER: odoo
@@ -42,8 +44,10 @@ services:
     image: redis:latest
     deploy:
       resources:
+        reservations:
+          memory: 2G
         limits:
-          memory: 512m
+          memory: 4G
     ports:
       - "6379:6379"
     command: redis-server --save 60 1 --loglevel warning
