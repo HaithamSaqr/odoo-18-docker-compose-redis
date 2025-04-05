@@ -20,8 +20,10 @@ services:
     image: odoo:18
     deploy:
       resources:
+        reservations:
+          memory: 2G
         limits:
-          memory: 4g
+          memory: 4G
     shm_size: '2gb'
     depends_on:
       redis:
